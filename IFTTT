@@ -1,0 +1,23 @@
+
+int lightSensor = A0 ;
+int threshold =20;
+int value;
+
+void setup() {
+    pinMode(lightSensor,INPUT);
+} 
+void loop() { 
+    value = analogRead(lightSensor);
+    String intensity = String (value);
+    if (value >= threshold) 
+    { 
+        Particle.publish("dark", "Sun_absent", PRIVATE); 
+    
+    } 
+    else 
+    {
+        Particle.publish("light", "Sun_present", PRIVATE);
+    }
+    Particle.publish("value", intensity, PRIVATE);
+    delay(5000);
+} 
